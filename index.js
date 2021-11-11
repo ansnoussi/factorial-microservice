@@ -2,21 +2,47 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const factorial = (n) => (!(n > 1) ? 1 : factorial(n - 1) * n);
+// Calculate factorial of large numbers
+const factorial = (userInt) => {
+  if (userInt === 0) return "1";
+
+  if (!userInt) return "";
+
+  var i,
+    nextNumber,
+    carret,
+    result = userInt.toString().split("").reverse().map(Number);
+
+  while (--userInt) {
+    i = carret = 0;
+
+    while ((nextNumber = result[i++]) !== undefined || carret) {
+      carret = (nextNumber || 0) * userInt + carret;
+      result[i - 1] = carret % 10;
+      carret = parseInt(carret / 10);
+    }
+  }
+
+  return result.reverse().join("");
+};
 
 app.use(cors());
 
 app.get("/ping", (req, res) => {
-  return res.send("pong");
+  return res.status(200).send("pong");
 });
 
-app.get("/api/:number", (req, res) => {
-  let number = req.params.number;
-  let fact = parseInt(number);
+app.get("/:number", (req, res) => {
+  try {
+    let number = req.params.number;
+    let fact = parseInt(number);
 
-  return res.json({
-    factorial: factorial(fact),
-  });
+    return res.status(200).json({
+      factorial: factorial(fact),
+    });
+  } catch (e) {
+    return res.status(500).send("Ops, something went wrong!");
+  }
 });
 
 app.listen(3001, () => {
