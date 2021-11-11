@@ -49,6 +49,8 @@ app.get("/:number", (req, res) => {
   }
 });
 
-app.listen(3001, () => {
+var port = process.env.APP_PORT || 3000;
+
+app.listen(port, () => {
   console.log("Microservice started.");
 });
