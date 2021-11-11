@@ -37,14 +37,18 @@ app.get("/:number", (req, res) => {
     let number = req.params.number;
     let fact = parseInt(number);
 
+    if (fact < 0) {
+      res.status(422).send("number must be positive.");
+    }
+
     return res.status(200).json({
       factorial: factorial(fact),
     });
   } catch (e) {
-    return res.status(500).send("Ops, something went wrong!");
+    return res.status(400).send("please supply number.");
   }
 });
 
 app.listen(3001, () => {
-  console.log("Microservice started");
+  console.log("Microservice started.");
 });
