@@ -1,5 +1,7 @@
 
 const factorial = (userInt) => {
+    if (userInt < 0) return "-1";
+
     if (userInt === 0) return "1";
   
     if (!userInt) return "";
