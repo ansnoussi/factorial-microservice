@@ -1,31 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
-// Calculate factorial of large numbers
-const factorial = (userInt) => {
-  if (userInt === 0) return "1";
-
-  if (!userInt) return "";
-
-  var i,
-    nextNumber,
-    carret,
-    result = userInt.toString().split("").reverse().map(Number);
-
-  while (--userInt) {
-    i = carret = 0;
-
-    while ((nextNumber = result[i++]) !== undefined || carret) {
-      carret = (nextNumber || 0) * userInt + carret;
-      result[i - 1] = carret % 10;
-      carret = parseInt(carret / 10);
-    }
-  }
-
-  return result.reverse().join("");
-};
-
+const utils = require('./utils')
 app.use(cors());
 
 app.get("/ping", (req, res) => {
@@ -42,7 +18,7 @@ app.get("/:number", (req, res) => {
     }
 
     return res.status(200).json({
-      factorial: factorial(fact),
+      factorial: utils.factorial(fact),
     });
   } catch (e) {
     return res.status(400).send("please supply number.");
