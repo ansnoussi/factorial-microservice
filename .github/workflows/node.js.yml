@@ -25,4 +25,4 @@ jobs:
         cache: 'npm'
         
     - name: Test
-    - run: make test
+      run: make test
