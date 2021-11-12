@@ -13,3 +13,6 @@ test: install
 
 start_dev: install
 	npm run dev
+
+lint: install
+	npm run lint
