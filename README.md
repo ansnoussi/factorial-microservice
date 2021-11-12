@@ -15,3 +15,6 @@ docker build -t factorial-ms-gl:1.0 .
 ```
 docker run -d -p 3001:3000 factorial-ms-gl:1.0
 ```
+
+
+## number : 1
