@@ -14,5 +14,5 @@ test: install
 start_dev: install
 	npm run dev
 
-lint: 
+lint: install
 	npm run lint
