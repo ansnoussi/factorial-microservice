@@ -7,8 +7,8 @@ COPY package*.json ./
 RUN chown node:node package.json && chown node:node package-lock.json
 RUN npm install --only=production && npm cache clean --force
 
-COPY index.js .
-RUN chown node:node index.js
+COPY . .
+RUN chown -R node:node .
 
 ENV APP_PORT=3000
 EXPOSE 3000
